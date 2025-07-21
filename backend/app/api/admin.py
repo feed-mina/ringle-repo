@@ -3,6 +3,8 @@ from sqlalchemy.orm import Session
 from app.db.database import SessionLocal
 from app.schemas import membership as schemas
 from app.crud import membership as crud
+from app.schemas import user_membership as um_schemas
+from app.crud import user_membership as um_crud
 
 router = APIRouter()
 
@@ -21,3 +23,9 @@ def create_membership(data: schemas.MembershipCreate, db: Session = Depends(get_
 def list_memberships(db: Session = Depends(get_db)):
     return crud.get_memberships(db)
 
+
+
+
+@router.post("/assign", response_model=um_schemas.UserMembershipOut)
+def assign_membership(data: um_schemas.UserMembershipAssignRequest, db: Session = Depends(get_db)):
+    return um_crud.assign_membership(db, data)
