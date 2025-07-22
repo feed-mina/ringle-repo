@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS memberships (
 );
 
 CREATE TABLE IF NOT EXISTS membership_features (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
   membership_id UUID REFERENCES memberships(id),
   feature_name VARCHAR(50),
   limit_count INT
