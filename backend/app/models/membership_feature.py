@@ -9,7 +9,7 @@ class MembershipFeature(Base):
     id = Column(String, primary_key=True, index=True)
     membership_id = Column(String, ForeignKey("memberships.id"))
     feature_id = Column(String, ForeignKey("features.id"))
-    usage_limit = Column(Integer)
+    limit_count = Column(Integer)
 
     membership = relationship("Membership", back_populates="features")
     feature = relationship("Feature")

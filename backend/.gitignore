@@ -1,2 +1,31 @@
 .env
-Dockerfile
+# Python 관련
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# 가상환경
+venv/
+env/
+
+# 환경변수 파일
+.env
+
+# Docker 빌드 캐시나 설정
+*.log
+*.pid
+
+# Alembic 마이그레이션 (원한다면 제외)
+alembic/
+alembic.ini
+
+# 개발용 테스트 파일
+test_connection_debug*.py
+feature_chat.json
+
+# OS/IDE 자동 생성 파일
+.DS_Store
+.idea/
+.vscode/
+

@@ -7,4 +7,5 @@ class Feature(Base):
 
     id = Column(String, primary_key=True, index=True)
     name = Column(String, nullable=False)
+    description = Column(String, nullable=True)
 

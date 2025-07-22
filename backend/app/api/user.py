@@ -2,8 +2,8 @@ from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 from app.db.database import SessionLocal
 from app.crud import user_membership
-from app.crud.use_feature as feature_crud 
 from app.schemas.user_membership import UserMembershipStatusOut
+import app.crud.use_feature as feature_crud
 from app.schemas.use_feature import UseFeatureRequest, UseFeatureResponse
 
 router = APIRouter()

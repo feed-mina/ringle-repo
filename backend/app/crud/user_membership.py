@@ -4,7 +4,7 @@ from app.models.user_membership import UserMembership
 from app.models.membership import Membership, MembershipFeature
 from app.models.feature import Feature
 from app.models.usage_history import UsageHistory
-from app.schemas.user_membership import UserMembershipStatusOut, FeatureStatus
+from app.schemas.user_membership import UserMembershipStatusOut, FeatureStatus, UserMembershipAssignRequest
 
 def get_user_membership_status(db: Session, user_id: str) -> UserMembershipStatusOut:
     assignment = (
@@ -35,7 +35,7 @@ def get_user_membership_status(db: Session, user_id: str) -> UserMembershipStatu
             .count()
         )
 
-        remaining_count = max(0, mf.usage_limit - used_count)
+        remaining_count = max(0, mf.limit_count - used_count)
 
         feature_statuses.append(FeatureStatus(
             feature_name=feature.name,
@@ -49,4 +49,20 @@ def get_user_membership_status(db: Session, user_id: str) -> UserMembershipStatu
         end_date=assignment.end_date,
         features=feature_statuses
     )
+
+
+
+from datetime import datetime, timedelta
+
+def assign_membership(db: Session, data: UserMembershipAssignRequest):
+    new_um = UserMembership(
+        user_id=data.user_id,
+        membership_id=data.membership_id,
+        start_date=datetime.utcnow(),
+        end_date=datetime.utcnow() + timedelta(days=30)
+    )
+    db.add(new_um)
+    db.commit()
+    db.refresh(new_um)
+    return new_um
 
