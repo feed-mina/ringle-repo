@@ -1,0 +1,17 @@
+﻿# -*- coding: utf-8 -*-
+
+from sqlalchemy import create_engine
+
+try:
+    db_url = "postgresql+psycopg2://postgres:postgres1234@localhost:5432/ringle"
+    print("Creating engine...")
+    engine = create_engine(db_url)
+
+    print("Trying to connect...")
+    conn = engine.raw_connection()
+
+    print("Success!")
+    conn.close()
+except Exception as e:
+    print("Error:")
+    print(repr(e))
