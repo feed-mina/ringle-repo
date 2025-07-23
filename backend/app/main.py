@@ -4,6 +4,10 @@ from app.models import membership
 from app.db.database import Base, engine
 from app.models import user_membership
 from app.models import usage_history
+from app.models import user
+from dotenv import load_dotenv
+
+load_dotenv()
 
 Base.metadata.create_all(bind=engine)
 
